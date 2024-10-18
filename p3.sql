@@ -40,14 +40,6 @@ GO
         CONSTRAINT user_phone_PK primary key (userID, phone)
     )
 
-    CREATE TABLE FlightBooking (
-        confirmationNumber int not null,
-		userID int not null,
-        CONSTRAINT confirmationNumber_PK primary key (confirmationNumber),
-		CONSTRAINT userID_FK foreign key (userID)
-		REFERENCES [User](userID)
-    )
-
     CREATE TABLE HotelReview (
         userID int not null,
         hotelID int not null,
@@ -169,6 +161,17 @@ GO
 		CONSTRAINT hotelRoom_PK foreign key (hotelID, roomNumber)
 		REFERENCES Room(hotelID, roomNumber)
 	)
+
+	CREATE TABLE FlightBooking (
+        confirmationNumber int not null,
+		userID int not null,
+		ticketNumber int not null,
+        CONSTRAINT confirmationNumber_PK primary key (confirmationNumber),
+		CONSTRAINT userID_FK foreign key (userID)
+		REFERENCES [User](userID),
+		CONSTRAINT ticket_PK foreign key (ticketNumber)
+		REFERENCES Ticket(ticketNumber)
+    )
 
     INSERT INTO [User] (userID, [name], email) 
     VALUES 
