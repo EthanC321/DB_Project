@@ -17,7 +17,7 @@ GO
             AND '12'
             AND SUBSTRING(expiration, 1, 2) BETWEEN '01'
             AND '31'
-        )
+        ),
         CONSTRAINT transactionNumber_PK primary key (transactionNumber)
     )
 
@@ -27,7 +27,7 @@ GO
         email TEXT not null,
         CONSTRAINT email_format CHECK(
             email LIKE '^[^@]+@[^@]+\.[^@]+$'
-        )
+        ),
         CONSTRAINT userID_PK primary key (userID)
     )
 
@@ -36,7 +36,7 @@ GO
         phone nvarchar(12) not null,
         CONSTRAINT phone_format CHECK (
             phone LIKE '^\d{3}-\d{3}-\d{4}$'
-        )
+        ),
         CONSTRAINT user_phone_PK primary key (userID, phone)
     )
 
@@ -56,7 +56,7 @@ GO
         stars int not null,
         CONSTRAINT stars_format CHECK (
             stars BETWEEN 1 and 5
-        )
+        ),
         comment TEXT,
         CONSTRAINT user_hotel_pk primary key (userID,hotelID)
     )
@@ -67,7 +67,7 @@ GO
         stars int not null,
         CONSTRAINT stars_format CHECK (
             stars BETWEEN 1 and 5
-        )
+        ),
         comment TEXT,
         CONSTRAINT user_flight_pk primary key (userID,flightNumber)
     )
@@ -118,7 +118,7 @@ GO
         phone nvarchar(12) not null,
         CONSTRAINT phone_format CHECK (
             phone LIKE '^\d{3}-\d{3}-\d{4}$'
-        )
+        ),
         CONSTRAINT name_pk primary key (airlineName)
     )
 
@@ -129,7 +129,7 @@ GO
         Gate nvarchar(4) not null,
         CONSTRAINT Gate_format CHECK (
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
-        )
+        ),
         CONSTRAINT flightNumber_PK primary key (flightNumber)
     )
 
@@ -140,7 +140,7 @@ GO
         Gate nvarchar(4) not null,
         CONSTRAINT Gate_format CHECK (
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
-        )
+        ),
         CONSTRAINT flightNumber_PK primary key (flightNumber)
     )
 
@@ -155,7 +155,7 @@ GO
 
     CREATE TABLE LocatedIn (
         airlineName TEXT not null,
-        airportCode nvarchar(4) not null
+        airportCode nvarchar(4) not null,
         kiosk TEXT not null,
         CONSTRAINT name_code_pk primary key (airlineName,airportCode)
     )
