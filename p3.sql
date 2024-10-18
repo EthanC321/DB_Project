@@ -72,15 +72,12 @@ GO
 
     CREATE TABLE Flight (
         flightNumber int not null,
+		airlineName TEXT not null,
         departure Datetime not null,
         arrival Datetime not null,
-        CONSTRAINT flightNumber_PK primary key (flightNumber)
-    )
-
-    CREATE TABLE FlightByAirline (
-        flightNumber int not null,
-        airlineName TEXT not null,
-        CONSTRAINT flightNumber_PK primary key (flightNumber)
+        CONSTRAINT flightNumber_PK primary key (flightNumber),
+		CONSTRAINT airline_FK foreign key (airlineName)
+		REFERENCES Airline(airlineName)
     )
 
     CREATE TABLE Airline (
