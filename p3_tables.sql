@@ -11,7 +11,7 @@ GO
 
         cvv int not null,
         expiration nvarchar(5),
-        CONSTRAINT expiration_format CHECK(
+        CONSTRAINT expirationFormat CHECK(
             expiration LIKE '[0-1][0-9]/[0-9][0-9]'
             AND SUBSTRING(expiration, 1, 2) BETWEEN '01'
             AND '12'
@@ -25,7 +25,7 @@ GO
         userID int not null,
         [name] TEXT not null,
         email nvarchar(255) not null,
-        CONSTRAINT email_format CHECK(
+        CONSTRAINT emailFormat CHECK(
             email LIKE '^[^@]+@[^@]+\.[^@]+$'
         ),
         CONSTRAINT userID_PK primary key (userID)
@@ -34,7 +34,7 @@ GO
     CREATE TABLE UserPhone (
         userID int not null,
         phone nvarchar(12) not null,
-        CONSTRAINT phone_format CHECK (
+        CONSTRAINT userPhoneFormat CHECK (
             phone LIKE '^\d{3}-\d{3}-\d{4}$'
         ),
         CONSTRAINT userPhone_PK primary key (userID, phone)
@@ -64,7 +64,7 @@ GO
     CREATE TABLE Airline (
         airlineName nvarchar(255) not null,
         phone nvarchar(12) not null,
-        CONSTRAINT phone_format CHECK (
+        CONSTRAINT airlinePhoneFormat CHECK (
             phone LIKE '^\d{3}-\d{3}-\d{4}$'
         ),
         CONSTRAINT name_PK primary key (airlineName)
@@ -103,7 +103,7 @@ GO
         airportCode nvarchar(4) not null,
         terminal char(1) not null,
         gate nvarchar(4) not null,
-        CONSTRAINT Gate_format CHECK (
+        CONSTRAINT toGateFormat CHECK (
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
         CONSTRAINT flightNumber_PK primary key (flightNumber, airportCode),
@@ -118,7 +118,7 @@ GO
         airportCode nvarchar(4) not null,
         terminal char(1) not null,
         gate nvarchar(4) not null,
-        CONSTRAINT Gate_format CHECK (
+        CONSTRAINT fromGateFormat CHECK (
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
         CONSTRAINT flightNumber_PK primary key (flightNumber, airportCode),
@@ -172,7 +172,7 @@ GO
         userID int not null,
         hotelID int not null,
         stars int not null,
-        CONSTRAINT stars_format CHECK (
+        CONSTRAINT hotelStarsFormat CHECK (
             stars BETWEEN 1 and 5
         ),
         comment TEXT,
@@ -187,7 +187,7 @@ GO
         userID int not null,
         flightNumber int not null,
         stars int not null,
-        CONSTRAINT stars_format CHECK (
+        CONSTRAINT flightStarsFormat CHECK (
             stars BETWEEN 1 and 5
         ),
         comment TEXT,
