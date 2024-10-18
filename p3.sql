@@ -42,12 +42,18 @@ GO
 
     CREATE TABLE FlightBooking (
         confirmationNumber int not null,
-        CONSTRAINT confirmationNumber_PK primary key (confirmationNumber)
+		userID int not null,
+        CONSTRAINT confirmationNumber_PK primary key (confirmationNumber),
+		CONSTRAINT userID_FK foreign key (userID)
+		REFERENCES [User](userID)
     )
 
     CREATE TABLE HotelBooking (
-        confirmationNumber int not null
-        CONSTRAINT confirmationNumber_PK primary key (confirmationNumber)
+        confirmationNumber int not null,
+		userID int not null,
+        CONSTRAINT confirmationNumber_PK primary key (confirmationNumber),
+		CONSTRAINT userID_FK foreign key (userID)
+		REFERENCES [User](userID)
     )
 
     CREATE TABLE HotelReview (
