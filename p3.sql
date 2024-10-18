@@ -37,7 +37,7 @@ GO
         CONSTRAINT phone_format CHECK (
             phone LIKE '^\d{3}-\d{3}-\d{4}$'
         ),
-        CONSTRAINT user_phone_PK primary key (userID, phone)
+        CONSTRAINT userPhone_PK primary key (userID, phone)
     )
 
     CREATE TABLE Hotel (
@@ -56,7 +56,7 @@ GO
         roomNumber int not null,
         beds int not null,
         baths int not null,
-        CONSTRAINT hotelroom primary key (hotelID,roomNumber),
+        CONSTRAINT hotelRoom primary key (hotelID,roomNumber),
 		CONSTRAINT hotelID_FK FOREIGN KEY (hotelID)
 		REFERENCES Hotel(hotelID)
     )
@@ -80,7 +80,7 @@ GO
     CREATE TABLE FlightByAirline (
         flightNumber int not null,
         airlineName TEXT not null,
-        CONSTRAINT flightNumber_pk primary key (flightNumber)
+        CONSTRAINT flightNumber_PK primary key (flightNumber)
     )
 
     CREATE TABLE Airline (
@@ -89,7 +89,7 @@ GO
         CONSTRAINT phone_format CHECK (
             phone LIKE '^\d{3}-\d{3}-\d{4}$'
         ),
-        CONSTRAINT name_pk primary key (airlineName)
+        CONSTRAINT name_PK primary key (airlineName)
     )
 
     CREATE TABLE FlightToAirport(
@@ -127,7 +127,7 @@ GO
         airlineName TEXT not null,
         airportCode nvarchar(4) not null,
         kiosk TEXT not null,
-        CONSTRAINT name_code_pk primary key (airlineName,airportCode)
+        CONSTRAINT nameCode_PK primary key (airlineName,airportCode)
     )
 
 	CREATE TABLE HotelBooking (
@@ -182,7 +182,7 @@ GO
             stars BETWEEN 1 and 5
         ),
         comment TEXT,
-        CONSTRAINT user_flight_pk primary key (userID,flightNumber),
+        CONSTRAINT userFlight_PK primary key (userID,flightNumber),
 		CONSTRAINT user_FK foreign key (userID)
 		REFERENCES [User](userID),
 		CONSTRAINT flight_FK foreign key (flightNumber)
