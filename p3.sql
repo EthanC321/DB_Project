@@ -97,7 +97,11 @@ GO
         CONSTRAINT Gate_format CHECK (
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
-        CONSTRAINT flightNumber_PK primary key (flightNumber)
+        CONSTRAINT flightNumber_PK primary key (flightNumber, airportCode),
+		CONSTRAINT airline_FK foreign key (flightNumber)
+		REFERENCES Flight(flightNumber),
+		CONSTRAINT airport_FK foreign key (airportCode)
+		REFERENCES Airport(airportCode)
     )
 
     CREATE TABLE FlightFromAirport(
