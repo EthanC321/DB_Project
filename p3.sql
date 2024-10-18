@@ -132,10 +132,13 @@ GO
 
 	CREATE TABLE HotelBooking (
 		confirmationNumber int not null,
+		transactionNumber int not null,
 		userID int not null,
 		hotelID int not null,
 		roomNumber int not null,
 		CONSTRAINT confirmationNumber_PK primary key (confirmationNumber),
+		CONSTRAINT transactionNumber_FK foreign key (transactionNumber)
+		REFERENCES [Transaction](transactionNumber),
 		CONSTRAINT userID_FK foreign key (userID)
 		REFERENCES [User](userID),
 		CONSTRAINT hotelRoom_PK foreign key (hotelID, roomNumber)
@@ -144,9 +147,12 @@ GO
 
 	CREATE TABLE FlightBooking (
         confirmationNumber int not null,
+		transactionNumber int not null,
 		userID int not null,
 		ticketNumber int not null,
         CONSTRAINT confirmationNumber_PK primary key (confirmationNumber),
+		CONSTRAINT transactionNumber_FK foreign key (transactionNumber)
+		REFERENCES [Transaction](transactionNumber),
 		CONSTRAINT userID_FK foreign key (userID)
 		REFERENCES [User](userID),
 		CONSTRAINT ticket_PK foreign key (ticketNumber)
