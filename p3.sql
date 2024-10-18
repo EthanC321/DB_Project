@@ -4,7 +4,7 @@ GO
     USE P3;
 
 GO
-    CREATE TABLE Transaction (
+    CREATE TABLE [Transaction] (
         transactionNumber int not null,
         amount decimal(10, 2) not null,
         cardnumber nvarchar(16),
@@ -21,7 +21,7 @@ GO
         CONSTRAINT transactionNumber_PK primary key (transactionNumber)
     )
 
-    CREATE TABLE User (
+    CREATE TABLE [User] (
         userID int not null,
         [name] TEXT not null,
         email TEXT not null,
@@ -160,7 +160,7 @@ GO
         CONSTRAINT name_code_pk primary key (airlineName,airportCode)
     )
 
-    INSERT INTO User (userID, [name], email) 
+    INSERT INTO [User] (userID, [name], email) 
     VALUES 
     (1, 'John Doe', 'john.doe@example.com'),
     (2, 'Jane Smith', 'jane.smith@example.com'),
