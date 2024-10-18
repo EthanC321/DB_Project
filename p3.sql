@@ -92,8 +92,8 @@ GO
     CREATE TABLE FlightToAirport(
         flightNumber int not null,
         airportCode nvarchar(4) not null,
-        Terminal char(1) not null,
-        Gate nvarchar(4) not null,
+        terminal char(1) not null,
+        gate nvarchar(4) not null,
         CONSTRAINT Gate_format CHECK (
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
@@ -107,8 +107,8 @@ GO
     CREATE TABLE FlightFromAirport(
         flightNumber int not null,
         airportCode nvarchar(4) not null,
-        Terminal char(1) not null,
-        Gate nvarchar(4) not null,
+        terminal char(1) not null,
+        gate nvarchar(4) not null,
         CONSTRAINT Gate_format CHECK (
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
