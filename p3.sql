@@ -78,7 +78,9 @@ GO
         roomNumber int not null,
         beds int not null,
         baths int not null,
-        CONSTRAINT hotelroom primary key (hotelID,roomNumber)
+        CONSTRAINT hotelroom primary key (hotelID,roomNumber),
+		CONSTRAINT hotelID_FK FOREIGN KEY (hotelID)
+		REFERENCES Hotel(hotelID)
     )
 
     CREATE TABLE Ticket (
