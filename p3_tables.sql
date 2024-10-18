@@ -13,9 +13,10 @@ BEGIN TRANSACTION;
         cvv int not null,
         expiration nvarchar(5),
         CONSTRAINT expirationFormat CHECK(
-            expiration LIKE '[0-1][0-9]/[0-9][0-9]'
-            AND SUBSTRING(expiration, 1, 2) BETWEEN '01' AND '12'
-            AND SUBSTRING(expiration, 4, 2) BETWEEN '00' AND '99'
+			expiration LIKE '__/__/____' 
+            --expiration LIKE '[0-1][0-9]/[0-9][0-9]'
+            --AND SUBSTRING(expiration, 1, 2) BETWEEN '01' AND '12'
+            --AND SUBSTRING(expiration, 4, 2) BETWEEN '00' AND '99'
         ),
         CONSTRAINT transactionNumber_PK primary key (transactionNumber)
     );
@@ -25,7 +26,8 @@ BEGIN TRANSACTION;
         [name] TEXT not null,
         email nvarchar(255) not null,
         CONSTRAINT emailFormat CHECK(
-            email LIKE '^[^@]+@[^@]+\.[^@]+$'
+			email LIKE '%_@__%.__%'
+            --email LIKE '^[^@]+@[^@]+\.[^@]+$'
         ),
         CONSTRAINT userID_PK primary key (userID)
     );
@@ -34,7 +36,8 @@ BEGIN TRANSACTION;
         userID int not null,
         phone nvarchar(12) not null,
         CONSTRAINT userPhoneFormat CHECK (
-            phone LIKE '^\d{3}-\d{3}-\d{4}$'
+			phone LIKE '___-___-____'
+            --phone LIKE '^\d{3}-\d{3}-\d{4}$'
         ),
         CONSTRAINT userPhone_PK primary key (userID, phone)
     );
@@ -64,7 +67,8 @@ BEGIN TRANSACTION;
         airlineName nvarchar(255) not null,
         phone nvarchar(12) not null,
         CONSTRAINT airlinePhoneFormat CHECK (
-            phone LIKE '^\d{3}-\d{3}-\d{4}$'
+			phone LIKE '___-___-____'
+            --phone LIKE '^\d{3}-\d{3}-\d{4}$'
         ),
         CONSTRAINT airlineName_PK primary key (airlineName)
     );
@@ -103,7 +107,8 @@ BEGIN TRANSACTION;
         terminal char(1) not null,
         gate nvarchar(4) not null,
         CONSTRAINT toGateFormat CHECK (
-            gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
+			gate LIKE '[A-Z]%'
+            --gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
         CONSTRAINT flightToAirport_PK primary key (flightNumber, airportCode),
         CONSTRAINT flightToAirportFlightNumber_FK foreign key (flightNumber)
@@ -118,7 +123,8 @@ BEGIN TRANSACTION;
         terminal char(1) not null,
         gate nvarchar(4) not null,
         CONSTRAINT fromGateFormat CHECK (
-            gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
+			gate LIKE '[A-Z]%'
+            --gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
         CONSTRAINT flightFromAirport_PK primary key (flightNumber, airportCode),
         CONSTRAINT flightFromAirportFlightNumber_FK foreign key (flightNumber)
