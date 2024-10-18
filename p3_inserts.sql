@@ -167,103 +167,112 @@ BEGIN TRANSACTION;
 	(1029, 'Etihad Airways', '2024-11-10 07:00', '2024-11-10 10:00'),
 	(1030, 'LATAM Airlines', '2024-11-10 08:15', '2024-11-10 11:15');
 
-    --INSERT INTO Flight (flightNumber, departure, arrival) 
-    --VALUES 
-    --(1001, '2024-10-20 08:00:00', '2024-10-20 12:00:00'),
-    --(1002, '2024-10-21 14:00:00', '2024-10-21 18:00:00'),
-    --(1003, '2024-10-22 09:30:00', '2024-10-22 13:30:00'),
-    --(1004, '2024-11-01 10:00:00', '2024-11-01 14:00:00'),
-    --(1005, '2024-11-02 11:15:00', '2024-11-02 15:15:00'),
-    --(1006, '2024-11-03 12:30:00', '2024-11-03 16:30:00'),
-    --(1007, '2024-11-04 08:45:00', '2024-11-04 12:45:00'),
-    --(1008, '2024-11-05 13:00:00', '2024-11-05 17:00:00'),
-    --(1009, '2024-11-06 06:30:00', '2024-11-06 10:30:00'),
-    --(1010, '2024-11-07 09:45:00', '2024-11-07 13:45:00'),
-    --(1011, '2024-11-08 12:00:00', '2024-11-08 16:00:00'),
-    --(1012, '2024-11-09 11:15:00', '2024-11-09 15:15:00'),
-    --(1013, '2024-11-10 08:00:00', '2024-11-10 12:00:00'),
-    --(1014, '2024-11-11 14:30:00', '2024-11-11 18:30:00'),
-    --(1015, '2024-11-12 13:15:00', '2024-11-12 17:15:00'),
-    --(1016, '2024-11-13 09:00:00', '2024-11-13 13:00:00'),
-    --(1017, '2024-11-14 15:45:00', '2024-11-14 19:45:00'),
-    --(1018, '2024-11-15 07:30:00', '2024-11-15 11:30:00'),
-    --(1019, '2024-11-16 16:00:00', '2024-11-16 20:00:00'),
-    --(1020, '2024-11-17 12:15:00', '2024-11-17 16:15:00'),
-    --(1021, '2024-11-18 14:45:00', '2024-11-18 18:45:00'),
-    --(1022, '2024-11-19 10:30:00', '2024-11-19 14:30:00'),
-    --(1023, '2024-11-20 13:00:00', '2024-11-20 17:00:00'),
-    --(1024, '2024-11-21 08:45:00', '2024-11-21 12:45:00'),
-    --(1025, '2024-11-22 15:15:00', '2024-11-22 19:15:00'),
-    --(1026, '2024-11-23 09:00:00', '2024-11-23 13:00:00'),
-    --(1027, '2024-11-24 06:00:00', '2024-11-24 10:00:00'),
-    --(1028, '2024-11-25 10:45:00', '2024-11-25 14:45:00'),
-    --(1029, '2024-11-26 12:30:00', '2024-11-26 16:30:00'),
-    --(1030, '2024-11-27 16:45:00', '2024-11-27 20:45:00');
+    BULK INSERT [Transaction]
+    FROM 'transaction_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
 
-    --INSERT INTO Ticket (ticketNumber, passenger, flightNumber) 
-    --VALUES 
-    --(1, 'John Doe', 1001),
-    --(2, 'Jane Smith', 1002),
-    --(3, 'Alice Johnson', 1003),
-    --(4, 'Bob Williams', 1004),
-    --(5, 'Mary Brown', 1005),
-    --(6, 'Michael Davis', 1006),
-    --(7, 'Emily Clark', 1007),
-    --(8, 'Chris Johnson', 1008),
-    --(9, 'Patricia Martinez', 1009),
-    --(10, 'James Lee', 1010),
-    --(11, 'Jennifer Lewis', 1011),
-    --(12, 'Robert Walker', 1012),
-    --(13, 'Linda Scott', 1013),
-    --(14, 'David Hall', 1014),
-    --(15, 'Susan Young', 1015),
-    --(16, 'Richard King', 1016),
-    --(17, 'Barbara Wright', 1017),
-    --(18, 'Charles Green', 1018),
-    --(19, 'Jessica Adams', 1019),
-    --(20, 'Daniel Nelson', 1020),
-    --(21, 'Sophia Hill', 1021),
-    --(22, 'George Carter', 1022),
-    --(23, 'Olivia Mitchell', 1023),
-    --(24, 'Nancy Perez', 1024),
-    --(25, 'Mark Roberts', 1025),
-    --(26, 'Lisa Phillips', 1026),
-    --(27, 'Paul Evans', 1027),
-    --(28, 'Sarah Turner', 1028),
-    --(29, 'Kevin Parker', 1029),
-    --(30, 'Laura Edwards', 1030);
+    BULK INSERT UserPhone
+    FROM 'user_phone_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
 
-    --INSERT INTO FlightToAirport (flightNumber, airportCode, Terminal, Gate) 
-    --VALUES 
-    --(1001, 'MIA', 'B', 'B12'),
-    --(1002, 'DEN', 'C', 'C45'),
-    --(1003, 'JFK', 'A', 'A10'),
-    --(1004, 'LAX', 'B', 'B11'),
-    --(1005, 'ORD', 'C', 'C23'),
-    --(1006, 'ATL', 'D', 'D14'),
-    --(1007, 'DFW', 'A', 'A20'),
-    --(1008, 'SEA', 'B', 'B8'),
-    --(1009, 'PHX', 'C', 'C16'),
-    --(1010, 'BOS', 'D', 'D5'),
-    --(1011, 'LAS', 'E', 'E12'),
-    --(1012, 'SFO', 'F', 'F3'),
-    --(1013, 'MCO', 'A', 'A17'),
-    --(1014, 'EWR', 'B', 'B7'),
-    --(1015, 'IAD', 'C', 'C9'),
-    --(1016, 'CLT', 'D', 'D22'),
-    --(1017, 'MSP', 'E', 'E18'),
-    --(1018, 'FLL', 'F', 'F11'),
-    --(1019, 'MCI', 'A', 'A1'),
-    --(1020, 'TPA', 'B', 'B9'),
-    --(1021, 'HOU', 'C', 'C4'),
-    --(1022, 'SLC', 'D', 'D8'),
-    --(1023, 'BWI', 'E', 'E5'),
-    --(1024, 'SAN', 'F', 'F10'),
-    --(1025, 'PDX', 'A', 'A2'),
-    --(1026, 'DTW', 'B', 'B6'),
-    --(1027, 'PHL', 'C', 'C15'),
-    --(1028, 'AUS', 'D', 'D3'),
-    --(1029, 'MDW', 'E', 'E9'),
-    --(1030, 'JAX', 'F', 'F4');
+    BULK INSERT Ticket
+    FROM 'ticket_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT Airport
+    FROM 'airport_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT [Transaction]
+    FROM 'transaction_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT FlightFromAirport
+    FROM 'flight_from_airport_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT FlightToAirport
+    FROM 'flight_to_airport_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT LocatedIn
+    FROM 'located_in_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT HotelBooking
+    FROM 'hotel_booking_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT FlightBooking
+    FROM 'flight_booking_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT HotelReview
+    FROM 'hotel_review_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
+
+    BULK INSERT FlightReview
+    FROM 'flight_review_data.csv'
+    WITH
+    (
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        FIRSTROW = 2
+    );
 
 COMMIT;

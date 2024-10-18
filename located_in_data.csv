@@ -1,0 +1,31 @@
+airlineName,airportCode,kiosk
+Delta Airlines,JFK,K01
+American Airlines,LAX,K02
+United Airlines,ATL,K03
+Southwest Airlines,ORD,K04
+JetBlue Airways,DFW,K05
+Alaska Airlines,MIA,K06
+Spirit Airlines,SEA,K07
+Frontier Airlines,PHX,K08
+Hawaiian Airlines,BOS,K09
+Allegiant Air,SFO,K10
+Sun Country Airlines,DEN,K11
+Virgin America,MCO,K12
+Air Canada,IAD,K13
+WestJet,HOU,K14
+British Airways,SLC,K15
+Lufthansa,BWI,K16
+Emirates,SAN,K17
+Qantas Airways,MDW,K18
+Singapore Airlines,TPA,K19
+Korean Air,PDX,K20
+Japan Airlines,AUS,K21
+ANA,MSP,K22
+Cathay Pacific,SJC,K23
+Turkish Airlines,OAK,K24
+Qatar Airways,ONT,K25
+Aeromexico,SMF,K26
+Air France,SAT,K27
+KLM,RDU,K28
+Etihad Airways,STL,K29
+LATAM Airlines,SJC,K30
