@@ -40,28 +40,6 @@ GO
         CONSTRAINT user_phone_PK primary key (userID, phone)
     )
 
-    CREATE TABLE HotelReview (
-        userID int not null,
-        hotelID int not null,
-        stars int not null,
-        CONSTRAINT stars_format CHECK (
-            stars BETWEEN 1 and 5
-        ),
-        comment TEXT,
-        CONSTRAINT user_hotel_pk primary key (userID,hotelID)
-    )
-
-    CREATE TABLE FlightReview (
-        userID int not null,
-        flightNumber int not null,
-        stars int not null,
-        CONSTRAINT stars_format CHECK (
-            stars BETWEEN 1 and 5
-        ),
-        comment TEXT,
-        CONSTRAINT user_flight_pk primary key (userID,flightNumber)
-    )
-
     CREATE TABLE Hotel (
         hotelID int not null,
         [name] TEXT not null,
@@ -173,6 +151,36 @@ GO
 		REFERENCES [User](userID),
 		CONSTRAINT ticket_PK foreign key (ticketNumber)
 		REFERENCES Ticket(ticketNumber)
+    )
+
+	CREATE TABLE HotelReview (
+        userID int not null,
+        hotelID int not null,
+        stars int not null,
+        CONSTRAINT stars_format CHECK (
+            stars BETWEEN 1 and 5
+        ),
+        comment TEXT,
+        CONSTRAINT userHotel_PK primary key (userID,hotelID),
+		CONSTRAINT user_FK foreign key (userID)
+		REFERENCES [User](userID),
+		CONSTRAINT hotel_FK foreign key (hotelID)
+		REFERENCES Hotel(hotelID)
+    )
+
+    CREATE TABLE FlightReview (
+        userID int not null,
+        flightNumber int not null,
+        stars int not null,
+        CONSTRAINT stars_format CHECK (
+            stars BETWEEN 1 and 5
+        ),
+        comment TEXT,
+        CONSTRAINT user_flight_pk primary key (userID,flightNumber),
+		CONSTRAINT user_FK foreign key (userID)
+		REFERENCES [User](userID),
+		CONSTRAINT flight_FK foreign key (flightNumber)
+		REFERENCES Flight(flightNumber)
     )
 
     INSERT INTO [User] (userID, [name], email) 
