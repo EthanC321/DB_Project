@@ -132,7 +132,11 @@ GO
         airlineName TEXT not null,
         airportCode nvarchar(4) not null,
         kiosk TEXT not null,
-        CONSTRAINT nameCode_PK primary key (airlineName,airportCode)
+        CONSTRAINT nameCode_PK primary key (airlineName,airportCode),
+		CONSTRAINT airline_FK foreign key (airlineName)
+		REFERENCES Airline(airlineName),
+		CONSTRAINT airport_FK foreign key (airportCode)
+		REFERENCES Airport(airportCode)
     )
 
 	CREATE TABLE HotelBooking (
