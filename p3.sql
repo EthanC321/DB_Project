@@ -61,25 +61,6 @@ GO
 		REFERENCES Hotel(hotelID)
     )
 
-    CREATE TABLE Ticket (
-        ticketNumber int not null,
-        passenger TEXT not null,
-        flightNumber int not null,
-        CONSTRAINT  flightNumber_FK foreign key (flightNumber)
-        REFERENCES Flight (flightNumber),
-        CONSTRAINT ticketNumber_PK primary key (ticketNumber)
-    )
-
-    CREATE TABLE Flight (
-        flightNumber int not null,
-		airlineName TEXT not null,
-        departure Datetime not null,
-        arrival Datetime not null,
-        CONSTRAINT flightNumber_PK primary key (flightNumber),
-		CONSTRAINT airline_FK foreign key (airlineName)
-		REFERENCES Airline(airlineName)
-    )
-
     CREATE TABLE Airline (
         airlineName TEXT not null,
         phone nvarchar(12) not null,
@@ -89,7 +70,35 @@ GO
         CONSTRAINT name_PK primary key (airlineName)
     )
 
-    CREATE TABLE FlightToAirport(
+	CREATE TABLE Flight (
+        flightNumber int not null,
+		airlineName TEXT not null,
+        departure Datetime not null,
+        arrival Datetime not null,
+        CONSTRAINT flightNumber_PK primary key (flightNumber),
+		CONSTRAINT airline_FK foreign key (airlineName)
+		REFERENCES Airline(airlineName)
+    )
+
+	CREATE TABLE Ticket (
+        ticketNumber int not null,
+        passenger TEXT not null,
+        flightNumber int not null,
+        CONSTRAINT  flightNumber_FK foreign key (flightNumber)
+        REFERENCES Flight (flightNumber),
+        CONSTRAINT ticketNumber_PK primary key (ticketNumber)
+    )
+
+    CREATE TABLE Airport (
+        airportCode nvarchar(4) not null,
+        street TEXT not null,
+        city TEXT not null,
+        [state] char(2),
+        zipCode int not null,
+        CONSTRAINT airportCode_PK primary key (airportCode)
+    )
+
+	CREATE TABLE FlightToAirport(
         flightNumber int not null,
         airportCode nvarchar(4) not null,
         terminal char(1) not null,
@@ -117,16 +126,7 @@ GO
 		REFERENCES Flight(flightNumber),
 		CONSTRAINT airport_FK foreign key (airportCode)
 		REFERENCES Airport(airportCode)
-    )
-
-    CREATE TABLE Airport (
-        airportCode nvarchar(4) not null,
-        street TEXT not null,
-        city TEXT not null,
-        [state] char(2),
-        zipCode int not null,
-        CONSTRAINT airportCode_PK primary key (airportCode)
-    )
+	)
 
     CREATE TABLE LocatedIn (
         airlineName TEXT not null,
