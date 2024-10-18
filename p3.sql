@@ -98,7 +98,7 @@ GO
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
         CONSTRAINT flightNumber_PK primary key (flightNumber, airportCode),
-		CONSTRAINT airline_FK foreign key (flightNumber)
+		CONSTRAINT flight_FK foreign key (flightNumber)
 		REFERENCES Flight(flightNumber),
 		CONSTRAINT airport_FK foreign key (airportCode)
 		REFERENCES Airport(airportCode)
@@ -113,7 +113,7 @@ GO
             Gate LIKE '^[a-zA-Z][^a-zA-Z]*$'
         ),
         CONSTRAINT flightNumber_PK primary key (flightNumber, airportCode),
-		CONSTRAINT airline_FK foreign key (flightNumber)
+		CONSTRAINT flight_FK foreign key (flightNumber)
 		REFERENCES Flight(flightNumber),
 		CONSTRAINT airport_FK foreign key (airportCode)
 		REFERENCES Airport(airportCode)
