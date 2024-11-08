@@ -1,5 +1,5 @@
 USE P3;
-GO;
+GO
 
 --Function to get user info, helpful because users can have multiple phones that need to be fetched
 --Will be useful for a profile page
@@ -10,18 +10,18 @@ RETURNS TABLE
 AS
 RETURN(
 	SELECT 
-		u.userID,
-		u.[name],
-		u.email,
+		U.userID,
+		U.[name],
+		U.email,
 		STRING_AGG(up.phone, ', ') AS phone
 	FROM 
-		[User] u
+		[User] U
 	LEFT JOIN 
-		UserPhone up ON u.userID = up.userID
+		UserPhone UP ON U.userID = UP.userID
 	WHERE
-		u.userID = @userID
+		U.userID = @userID
 	GROUP BY 
-		u.userID, u.name, u.email
+		U.userID, U.[name], U.email
 );
 GO
 
@@ -100,6 +100,70 @@ BEGIN
 		ROLLBACK TRANSACTION;
 	END
 END;
+GO
+
+--View to view all bookings
+--Can be used to get all of the bookings for a specific user, like with
+--SELECT * FROM vw_UserBookings WHERE userID = <insert user ID>;
+CREATE VIEW vw_UserBookings AS
+SELECT 
+    'Hotel' AS bookingType,
+    hb.confirmationNumber,
+    hb.transactionNumber,
+    hb.userID,
+	--Hotel specific fields
+    hb.hotelID,
+    hb.roomNumber,
+	--Flight specific field
+    NULL AS ticketNumber
+FROM 
+    HotelBooking hb
+UNION ALL
+SELECT 
+    'Flight' AS bookingType,
+    fb.confirmationNumber,
+    fb.transactionNumber,
+    fb.userID,
+	--Hotel specific fields
+    NULL AS hotelID,
+    NULL AS roomNumber,
+	--Flight specific field
+    fb.ticketNumber
+FROM 
+    FlightBooking fb;
+GO
+
+--View to see all flights happening, both incoming and outgoing
+--Can be used to get all of the flights at a specific airport, like with
+-- SELECT * FROM vw_FLIGHTS WHERE airportCode = <insert airport code>;
+CREATE VIEW vw_Flights AS
+SELECT
+	'To' as flightType,
+	FT.flightNumber,
+	FT.airportCode,
+	FT.terminal,
+	FT.gate
+FROM
+	FlightToAirport FT
+UNION ALL
+SELECT
+	'From' as flightType,
+	FF.flightNumber,
+	FF.airportCode,
+	FF.terminal,
+	FF.gate
+FROM
+	FlightFromAirport FF;
+GO
+	
+--View to get transaction history
+--Don't want to return any credit card information
+CREATE VIEW vw_Transaction AS
+SELECT
+	transactionNumber,
+	amount
+FROM
+	[Transaction];
 GO
 
 --Encrypt credit card info
