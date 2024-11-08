@@ -166,4 +166,24 @@ FROM
 	[Transaction];
 GO
 
---Encrypt credit card info
+--Encrypt credit card info in Transaction table
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'StrongPassword123!';
+
+CREATE CERTIFICATE TransactionCert
+WITH SUBJECT = 'Certificate for Transaction Credit Card Encryption';
+
+CREATE SYMMETRIC KEY TransactionKey
+WITH ALGORITHM = AES_256
+ENCRYPTION BY CERTIFICATE TransactionCert;
+
+--Encrypt the credit card fields + remove the unencrypted ones (security risk)
+ALTER TABLE [Transaction]
+ADD 
+	encryptedCardNumber VARBINARY(128),
+	encryptedCVV VARBINARY(128),
+	encryptedExpiration VARBINARY(128);
+ALTER TABLE [Transaction]
+DROP COLUMN 
+	cardnumber, 
+	cvv, 
+	expiration;
