@@ -1,6 +1,57 @@
 USE P3;
 GO
 
+-- Procedure to create new user
+-- useful for quickly adding new users without tedious inserts as users will be numerous
+CREATE PROCEDURE AddNewUser (
+    @UserID INT,
+    @Name TEXT,
+    @Email NVARCHAR(255)
+)
+AS
+BEGIN
+    INSERT INTO [User] (userID, [name], email)
+    VALUES (@UserID, @Name, @Email);
+END;
+
+
+-- Procedure to update departure/arrival time for a flight
+-- useful for flight delays or schedule changes being reflected in the database
+CREATE PROCEDURE UpdateFlightTime (
+    @FlightNumber INT,
+    @NewDeparture DATETIME,
+    @NewArrival DATETIME
+)
+AS
+BEGIN
+    UPDATE Flight
+    SET departure = @NewDeparture,
+        arrival = @NewArrival
+    WHERE flightNumber = @FlightNumber;
+END;
+
+-- Procedure to update reviews on hotels
+-- USeful for editing past comments or correcting errors without having to delete comment and resubmit
+CREATE PROCEDURE UpdateHotelReview (
+    @UserID INT,
+    @HotelID INT,
+    @Stars INT,
+    @Comment TEXT
+)
+AS
+BEGIN
+    IF @Stars < 1 OR @Stars > 5
+    BEGIN
+        PRINT 'Error: Stars rating must be between 1 and 5.';
+        RETURN;
+    END
+
+    UPDATE HotelReview
+    SET stars = @Stars,
+        comment = @Comment
+    WHERE userID = @UserID AND hotelID = @HotelID;
+END;
+
 --Function to get user info, helpful because users can have multiple phones that need to be fetched
 --Will be useful for a profile page
 CREATE FUNCTION GetUserInfo(
@@ -187,3 +238,12 @@ DROP COLUMN
 	cardnumber, 
 	cvv, 
 	expiration;
+
+CREATE NONCLUSTERED INDEX IX_User_Email
+ON [User] (email);
+
+CREATE NONCLUSTERED INDEX IX_Flight_Departure
+ON Flight (departure);
+
+CREATE NONCLUSTERED INDEX IX_Hotel_City
+ON Hotel (city);
