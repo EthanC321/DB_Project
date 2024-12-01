@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 const connectionString = 'data source=LAPTOP-LISVMLMR\\SQLEXPRESS;initial catalog=P3;user id=test;password=1;TrustServerCertificate=true';
 
-const db =  sql.connect(connectionString).then(connection => {
+const db = sql.connect(connectionString).then(connection => {
     console.log('Connected to SQL Server');
     return connection;
 }).catch(err => {
